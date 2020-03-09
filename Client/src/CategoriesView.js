@@ -15,7 +15,7 @@ const categoryIcons = {
 
 async function getProductsAsync() {
   try {
-    const response = await fetch("http://localhost:3000/products");
+    const response = await fetch("http://192.168.100.47:3000/products");
     if (!response.ok) {
       throw Error(response.statusText);
     }
