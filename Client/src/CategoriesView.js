@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, ActivityIndicator } from "react-native";
 import { groupBy } from "./utils";
 import { ScrollView } from "react-native-gesture-handler";
 import ShopBlock from "./ShopBlock";
@@ -10,12 +10,13 @@ const categoryIcons = {
   Pets: "dog",
   Fruits: "apple",
   Tools: "toolbox",
-  Clothes: "hanger"
+  Clothes: "hanger",
+  Hygiene: "toilet"
 };
 
-async function getProductsAsync() {
+const getProductsAsync = async () => {
   try {
-    const response = await fetch("http://192.168.100.47:3000/products");
+    const response = await fetch("http://192.168.100.48:3000/products");
     if (!response.ok) {
       throw Error(response.statusText);
     }
@@ -26,7 +27,20 @@ async function getProductsAsync() {
   } catch (error) {
     console.log("Looks like there was a problem: \n", error);
   }
-}
+};
+
+const preProcessProducts = products =>
+  products.map(p => {
+    return {
+      category: p.Category,
+      code: p.Code,
+      displayName: p.DisplayName,
+      price: {
+        value: p.PriceValue,
+        currency: p.PriceCurrency
+      }
+    };
+  });
 
 export default class CategoriesView extends React.Component {
   navigateToProductsView = products => {
@@ -44,12 +58,20 @@ export default class CategoriesView extends React.Component {
   }
 
   componentDidMount() {
-    getProductsAsync().then(products => this.setState({ products }));
+    getProductsAsync().then(products =>
+      this.setState({ products: preProcessProducts(products) })
+    );
   }
 
   render() {
     const allProducts = this.state.products;
-    if (!allProducts) return null;
+    if (!allProducts)
+      return (
+        <ActivityIndicator
+          style={{ width: "100%", height: "100%" }}
+          size="large"
+        />
+      );
 
     const productsByCategory = groupBy(allProducts, "category");
 
