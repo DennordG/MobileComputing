@@ -1,7 +1,6 @@
 import React from "react";
-import { ScrollView } from "react-native-gesture-handler";
-import { StyleSheet } from "react-native";
 import ShopBlock from "./ShopBlock";
+import AppScrollView from "./app/AppScrollView";
 
 export default function ProductsView(props) {
   const { route, navigation } = props;
@@ -11,22 +10,23 @@ export default function ProductsView(props) {
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      title: category
+      title: category,
     });
   });
 
-  const navigateToProductDetails = product => {
+  const navigateToProductDetails = (product) => {
     props.navigation.navigate({
       key: "ProductDetails",
       name: "ProductDetails",
       params: {
+        code: product.code,
         displayName: product.displayName,
-        price: product.price
-      }
+        price: product.price,
+      },
     });
   };
 
-  const displayProducts = params.products.map(p => (
+  const displayProducts = params.products.map((p) => (
     <ShopBlock
       key={p.code}
       displayText={p.displayName}
@@ -35,18 +35,5 @@ export default function ProductsView(props) {
     />
   ));
 
-  return (
-    <ScrollView
-      children={displayProducts}
-      contentContainerStyle={styles.productsView}
-    />
-  );
+  return <AppScrollView children={displayProducts} />;
 }
-
-const styles = StyleSheet.create({
-  productsView: {
-    flexGrow: 0,
-    flexDirection: "row",
-    flexWrap: "wrap"
-  }
-});

@@ -1,6 +1,7 @@
 import React from "react";
 import Shop from "./Shop";
 import About from "./About";
+import ShopCart from "./ShopCart/";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { MaterialCommunityIcons } from "react-native-vector-icons";
 
@@ -30,6 +31,16 @@ export default function NavigationTabs(props) {
               color={color}
               size={size}
             />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="ShopCart"
+        component={ShopCart}
+        options={{
+          tabBarLabel: "Cart",
+          tabBarIcon: ({ color, size = 18 }) => (
+            <MaterialCommunityIcons name="cart" color={color} size={size} />
           )
         }}
       />

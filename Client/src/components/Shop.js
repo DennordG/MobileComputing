@@ -13,7 +13,7 @@ export default function Shop(props) {
         name="CategoriesView"
         component={CategoriesView}
         options={{
-          title: "Categories"
+          title: "Categories",
         }}
       />
       <Stack.Screen name="ProductsView" component={ProductsView} />

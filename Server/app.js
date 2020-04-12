@@ -10,15 +10,16 @@ var productsRouter = require("./routes/products");
 
 var app = express();
 
-const whitelist = ["http://192.168.100.48:19006"];
+const whitelist = ["http://192.168.100.50:19006"];
 const corsOptions = {
-  origin: function(origin, callback) {
+  origin: function (origin, callback) {
+    console.log("Origin:", origin);
     if (!origin || whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
     }
-  }
+  },
 };
 
 app.use(cors(corsOptions));
@@ -37,12 +38,12 @@ app.use("/", indexRouter);
 app.use("/products", productsRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};

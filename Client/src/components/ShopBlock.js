@@ -1,6 +1,6 @@
 import React from "react";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import AppText from "./AppText";
+import AppText from "./app/AppText";
 import { StyleSheet, View } from "react-native";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 
@@ -28,16 +28,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "orange",
     height: 120,
-    backgroundColor: "white"
+    backgroundColor: "white",
   },
   button: {
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
   innerView: {
     flexDirection: "row",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
 });

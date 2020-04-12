@@ -1,8 +1,8 @@
 import React from "react";
-import { StyleSheet, ActivityIndicator } from "react-native";
+import { ActivityIndicator } from "react-native";
 import { groupBy } from "./utils";
-import { ScrollView } from "react-native-gesture-handler";
 import ShopBlock from "./ShopBlock";
+import AppScrollView from "./app/AppScrollView";
 
 const categoryIcons = {
   "Fast food": "food",
@@ -11,12 +11,12 @@ const categoryIcons = {
   Fruits: "apple",
   Tools: "toolbox",
   Clothes: "hanger",
-  Hygiene: "toilet"
+  Hygiene: "toilet",
 };
 
 const getProductsAsync = async () => {
   try {
-    const response = await fetch("http://192.168.100.48:3000/products");
+    const response = await fetch("http://192.168.100.50:3000/products");
     if (!response.ok) {
       throw Error(response.statusText);
     }
@@ -29,26 +29,26 @@ const getProductsAsync = async () => {
   }
 };
 
-const preProcessProducts = products =>
-  products.map(p => {
+const preProcessProducts = (products) =>
+  products.map((p) => {
     return {
       category: p.Category,
       code: p.Code,
       displayName: p.DisplayName,
       price: {
         value: p.PriceValue,
-        currency: p.PriceCurrency
-      }
+        currency: p.PriceCurrency,
+      },
     };
   });
 
 export default class CategoriesView extends React.Component {
-  navigateToProductsView = products => {
+  navigateToProductsView = (products) => {
     this.props.navigation.navigate({
       name: "ProductsView",
       params: {
-        products: products
-      }
+        products: products,
+      },
     });
   };
 
@@ -58,7 +58,7 @@ export default class CategoriesView extends React.Component {
   }
 
   componentDidMount() {
-    getProductsAsync().then(products =>
+    getProductsAsync().then((products) =>
       this.setState({ products: preProcessProducts(products) })
     );
   }
@@ -75,7 +75,7 @@ export default class CategoriesView extends React.Component {
 
     const productsByCategory = groupBy(allProducts, "category");
 
-    const displayItems = Object.keys(productsByCategory).map(category => (
+    const displayItems = Object.keys(productsByCategory).map((category) => (
       <ShopBlock
         key={category}
         displayText={category}
@@ -86,19 +86,6 @@ export default class CategoriesView extends React.Component {
       />
     ));
 
-    return (
-      <ScrollView
-        children={displayItems}
-        contentContainerStyle={styles.categoryView}
-      />
-    );
+    return <AppScrollView children={displayItems} />;
   }
 }
-
-const styles = StyleSheet.create({
-  categoryView: {
-    flexGrow: 0,
-    flexDirection: "row",
-    flexWrap: "wrap"
-  }
-});
