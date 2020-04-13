@@ -1,5 +1,5 @@
 import React from "react";
-import AppText from "./appComponents/AppText";
+import AppText from "./app/AppText";
 import { View } from "react-native";
 
 export default function About(props) {

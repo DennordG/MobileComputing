@@ -1,7 +1,7 @@
 import React from "react";
-import AppText from "../appComponents/AppText";
-import AppButton from "../appComponents/AppButton";
-import AppScrollView from "../appComponents/AppScrollView";
+import AppText from "../app/AppText";
+import AppButton from "../app/AppButton";
+import AppScrollView from "../app/AppScrollView";
 import { StyleSheet } from "react-native";
 import { stringifyPrice } from "../utils";
 

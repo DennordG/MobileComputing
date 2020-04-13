@@ -1,7 +1,9 @@
 import React from "react";
-import CategoriesView from "./CategoriesView";
+import CategoriesView from "./CategoriesView/";
 import ProductsView from "./ProductsView";
-import ProductDetails from "./ProductDetails";
+import ProductDetails from "./ProductDetails/";
+import SearchView from "./SearchView/";
+import SearchIcon from "./SearchIcon";
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Stack = createStackNavigator();
@@ -12,8 +14,18 @@ export default function Shop(props) {
       <Stack.Screen
         name="CategoriesView"
         component={CategoriesView}
-        options={{
+        options={({ navigation }) => ({
           title: "Categories",
+          headerRight: () => (
+            <SearchIcon onPress={() => navigation.push("SearchView")} />
+          ),
+        })}
+      />
+      <Stack.Screen
+        name="SearchView"
+        component={SearchView}
+        options={{
+          title: "Search",
         }}
       />
       <Stack.Screen name="ProductsView" component={ProductsView} />

@@ -1,8 +1,8 @@
 import React from "react";
 import { ActivityIndicator } from "react-native";
-import { groupBy } from "./utils";
-import ShopBlock from "./ShopBlock";
-import AppScrollView from "./app/AppScrollView";
+import { groupBy } from "../utils";
+import ShopBlock from "../ShopBlock";
+import AppScrollView from "../app/AppScrollView";
 
 const categoryIcons = {
   "Fast food": "food",
@@ -13,34 +13,6 @@ const categoryIcons = {
   Clothes: "hanger",
   Hygiene: "toilet",
 };
-
-const getProductsAsync = async () => {
-  try {
-    const response = await fetch("http://192.168.100.50:3000/products");
-    if (!response.ok) {
-      throw Error(response.statusText);
-    }
-
-    const responseJson = await response.json();
-
-    return responseJson;
-  } catch (error) {
-    console.log("Looks like there was a problem: \n", error);
-  }
-};
-
-const preProcessProducts = (products) =>
-  products.map((p) => {
-    return {
-      category: p.Category,
-      code: p.Code,
-      displayName: p.DisplayName,
-      price: {
-        value: p.PriceValue,
-        currency: p.PriceCurrency,
-      },
-    };
-  });
 
 export default class CategoriesView extends React.Component {
   navigateToProductsView = (products) => {
@@ -54,18 +26,12 @@ export default class CategoriesView extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { products: null };
-  }
-
-  componentDidMount() {
-    getProductsAsync().then((products) =>
-      this.setState({ products: preProcessProducts(products) })
-    );
+    this.props.fetchProducts();
   }
 
   render() {
-    const allProducts = this.state.products;
-    if (!allProducts)
+    const { products, loading } = this.props;
+    if (loading)
       return (
         <ActivityIndicator
           style={{ width: "100%", height: "100%" }}
@@ -73,7 +39,11 @@ export default class CategoriesView extends React.Component {
         />
       );
 
-    const productsByCategory = groupBy(allProducts, "category");
+    if (!products) {
+      return null;
+    }
+
+    const productsByCategory = groupBy(products, "category");
 
     const displayItems = Object.keys(productsByCategory).map((category) => (
       <ShopBlock

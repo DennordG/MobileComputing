@@ -7,7 +7,7 @@ const shopCart = (state = {}, action) => {
 
       const newProduct = action.payload;
       const existingIndex = newCartProducts.findIndex(
-        p => p.code == newProduct.code
+        (p) => p.code == newProduct.code
       );
       if (existingIndex !== -1) {
         newCartProducts[existingIndex].count++;
@@ -18,7 +18,7 @@ const shopCart = (state = {}, action) => {
 
       return {
         ...state,
-        cartProducts: newCartProducts
+        cartProducts: newCartProducts,
       };
     }
 

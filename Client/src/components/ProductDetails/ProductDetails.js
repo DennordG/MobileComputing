@@ -1,11 +1,10 @@
 import React from "react";
-import AppText from "./app/AppText";
-import AppButton from "./app/AppButton";
+import AppText from "../app/AppText";
+import AppButton from "../app/AppButton";
 import { View } from "react-native";
-import { stringifyPrice } from "./utils";
-import { connect } from "react-redux";
+import { stringifyPrice } from "../utils";
 
-function ProductDetails(props) {
+const ProductDetails = (props) => {
   const { route, navigation } = props;
   const { params } = route;
 
@@ -27,13 +26,6 @@ function ProductDetails(props) {
       />
     </View>
   );
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addProductToCart: (product) =>
-      dispatch({ type: "ADD_TO_CART", payload: product }),
-  };
 };
 
-export default connect(null, mapDispatchToProps)(ProductDetails);
+export default ProductDetails;
