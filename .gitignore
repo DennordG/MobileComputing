@@ -10,6 +10,13 @@
 *.orig.*
 */web-build/
 */web-report/
+*.so
+*.class
+*.flat
+*.dex
+*Client/android/app/build/*
+*Client/android/.idea
+*Client/android/.gradle
 
 # macOS
 .DS_Store
