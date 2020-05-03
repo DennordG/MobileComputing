@@ -23,11 +23,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#3a51bf",
     height: 35,
     minWidth: 80,
+    paddingHorizontal: 10,
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   defaultTextStyle: {
     fontSize: 15,
-    color: "white"
-  }
+    color: "white",
+  },
 });
