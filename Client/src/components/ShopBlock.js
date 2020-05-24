@@ -22,7 +22,7 @@ export default function ShopBlock(props) {
 const styles = StyleSheet.create({
   block: {
     flex: 1,
-    flexGrow: 0,
+    flexGrow: 1,
     flexBasis: "100%",
     justifyContent: "center",
     borderWidth: 1,

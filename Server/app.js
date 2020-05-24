@@ -10,7 +10,7 @@ var productsRouter = require("./routes/products");
 
 var app = express();
 
-const whitelist = ["http://192.168.100.50:19006"];
+const whitelist = ["http://192.168.100.52:19006"];
 const corsOptions = {
   origin: function (origin, callback) {
     console.log("Origin:", origin);

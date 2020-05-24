@@ -1,8 +1,9 @@
 import React from "react";
 import ShopBlock from "./ShopBlock";
 import AppScrollView from "./app/AppScrollView";
+import { withOrientation } from "./utils";
 
-export default function ProductsView(props) {
+function ProductsView(props) {
   const { route, navigation } = props;
   const { params } = route;
 
@@ -31,9 +32,10 @@ export default function ProductsView(props) {
       key={p.code}
       displayText={p.displayName}
       onPress={() => navigateToProductDetails(p)}
-      style={{ flexBasis: "50%", flexGrow: 0 }}
     />
   ));
 
   return <AppScrollView children={displayProducts} />;
 }
+
+export default withOrientation(ProductsView);

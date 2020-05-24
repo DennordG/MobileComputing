@@ -4,6 +4,7 @@ import { View, Image, StyleSheet } from "react-native";
 import AppButton from "./app/AppButton";
 import { RNCamera } from "react-native-camera";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import AppScrollView from "./app/AppScrollView";
 
 export default class About extends React.Component {
   state = { cameraOn: false };
@@ -50,8 +51,8 @@ export default class About extends React.Component {
     }
 
     return (
-      <View
-        style={{
+      <AppScrollView
+        contentContainerStyle={{
           marginTop: 30,
           justifyContent: "center",
           alignItems: "center",
@@ -68,7 +69,7 @@ export default class About extends React.Component {
           title="Change photo..."
           onPress={this.openCamera}
         />
-      </View>
+      </AppScrollView>
     );
   }
 }

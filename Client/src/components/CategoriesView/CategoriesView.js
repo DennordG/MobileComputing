@@ -1,6 +1,6 @@
 import React from "react";
 import { ActivityIndicator } from "react-native";
-import { groupBy } from "../utils";
+import { groupBy, withOrientation } from "../utils";
 import ShopBlock from "../ShopBlock";
 import AppScrollView from "../app/AppScrollView";
 
@@ -14,7 +14,7 @@ const categoryIcons = {
   Hygiene: "toilet",
 };
 
-export default class CategoriesView extends React.Component {
+class CategoriesView extends React.Component {
   navigateToProductsView = (products) => {
     this.props.navigation.navigate({
       name: "ProductsView",
@@ -59,3 +59,5 @@ export default class CategoriesView extends React.Component {
     return <AppScrollView children={displayItems} />;
   }
 }
+
+export default withOrientation(CategoriesView);

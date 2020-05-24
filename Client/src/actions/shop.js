@@ -16,7 +16,7 @@ const preProcessProducts = (products) =>
 export const fetchProducts = () =>
   fetchData(
     createApiAction("FETCH_PRODUCTS", {
-      url: "http://192.168.100.50:3000/products",
+      url: "http://192.168.100.52:3000/products",
       processOnSuccess: preProcessProducts,
     })
   );
